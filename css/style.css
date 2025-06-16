@@ -1,0 +1,24 @@
+/* reset de margins y paddings de todos */
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: black;
+    padding: 45px;
+}
+.fondonav{
+    background-color:aliceblue;
+}
+h1{
+    text-align-last: center;
+    padding: 20px;
+}
+p{
+    text-align: center;
+    font-size: x-large;
+    padding: 30px;
+}
