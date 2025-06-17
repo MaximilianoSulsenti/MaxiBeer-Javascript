@@ -90,7 +90,7 @@ const cervezasArtesanales = [
 
 console.table(cervezasArtesanales)
 
-// Creando un bucle con while donde se pueda crear una lista de pedidos
+// Creando un bucle con while donde se puede hacer una lista de pedidos
 let entrar = "";
 while (entrar !== "salir"){
    entrar = prompt('escribe "salir" para terminar:');
@@ -98,6 +98,6 @@ while (entrar !== "salir"){
    console.log("Agregar a mi lista de compras : "  + entrar);
 }else{
     entrar = 'salir';
-    console.log ("Salida del Bucle");
+    console.log ("Lista finalizada");
 }
 }
