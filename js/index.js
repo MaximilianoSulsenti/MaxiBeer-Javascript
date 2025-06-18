@@ -13,7 +13,6 @@ function ingresar(){
 }
  ingresar ()
 
-
 // Bievenida al sitio ingresando al usuario
  function iniciar(){
     console.log ("Bienvenido a MaxiBeer")
@@ -33,11 +32,6 @@ function validar(usuario, password){
  }
 }
 iniciar()
-
-// creando un bucle con For
-for (let i = 0; i < 5 ;i++){
-    console.log ("Agregar a mi carrito:" + i);
-}
 
 // Se declara un Array con objetos dentro para agregar a una posible lista de productos 
 const cervezasArtesanales = [
@@ -89,6 +83,11 @@ const cervezasArtesanales = [
 ];
 
 console.table(cervezasArtesanales)
+
+// creando un bucle con For que recorre todos los productos del Array
+for (let i = 0; i < cervezasArtesanales.length; i++){
+    console.log ("Agregar a mi carrito:" + [i]);
+}
 
 // Creando un bucle con while donde se puede hacer una lista de pedidos
 let entrar = "";
