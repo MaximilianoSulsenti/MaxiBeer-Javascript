@@ -1,102 +1,104 @@
-let nombre = "Maxi";
-let apellido = "Sulsenti"
-let edad = 33;
-
-// funcion para validar la mayoria de edad 
-function ingresar(){
-  let edad = prompt("ingrese su edad");    
-  if (edad >= 18){
-      console.log("puedes ingresar");
-  }else{
-      console.log("no puedes ingresar");
- }
-}
- ingresar ()
-
-// Bievenida al sitio ingresando al usuario
- function iniciar(){
-    console.log ("Bienvenido a MaxiBeer")
-    login ();
-}
-function login (){
-    let usuario = prompt ("ingrese su usuario");
-    let password = prompt("ingrese su contrasena");
-    validar(usuario, password)
-}
-function validar(usuario, password){
- if (usuario === "maxi sulsenti" && password === "12345"){
-    console.log("Hola , Bienvenido a MaxiBeer.." + usuario);
- }else{
-    console.log("usuario o contrasena incorrecta")
-    login();
- }
-}
-iniciar()
-
-// Se declara un Array con objetos dentro para agregar a una posible lista de productos 
+//Array de productos disponibles
 const cervezasArtesanales = [
   {
     nombre: "Lager",
-    descripcion: "Cerveza Rubia suave .",
-    precio: 2800
+    descripcion: "Cerveza Antares Lager Lata 473cc.",
+    precio: 2800,
+    url: "./assets/img/lager.webp",
   },
   {
     nombre: "Stout",
-    descripcion: "Es una cerveza oscura con sabores intensos, a menudo con notas de café y chocolate. .",
-    precio: 2800
+    descripcion: "Cerveza Lata Cream Stout Pampa Brewing x 473 cc.",
+    precio: 2800,
+    url: "./assets/img/stout.jpg",
   },
   {
-    nombre: "Golden Ale Dorada",
-    descripcion: "Una cerveza ligera y refrescante, de color dorado brillante, con sutiles aromas frutales y un final limpio.",
-    precio: 3000
+    nombre: "Golden Ale ",
+    descripcion: "Cerveza Brewing Golden Ale Pampa x 473 cc.",
+    precio: 3000,
+    url: "./assets/img/golden.jpg",
   },
   {
     nombre: "Porter",
-    descripcion: "Cerveza oscura, con sabores a chocolate y café. .",
-    precio: 3000
+    descripcion: "Cerveza Artesanal Ortuzar Porter 5.7%Vol x 473 cc.",
+    precio: 3000,
+    url: "./assets/img/porter.jpg",
   },
   {
     nombre: "Honey Beer",
-    descripcion: "Elaborada con miel.",
-    precio: 3000
-  },
-  {
-    nombre: "IPA",
-    descripcion: "Un estilo con mucho lúpulo, amargo y aromático.",
-    precio: 3500
-  },
-  {
-    nombre: "Red Ale Malta",
-    descripcion: "Una cerveza rojiza con un marcado carácter a malta caramelizada.",
-    precio: 3500
+    descripcion: "Cerveza Honey Beer elaborada con miel x 473cc ",
+    precio: 3000,
+    url: "./assets/img/honey.jpg",
   },
   {
     nombre: "Blond Ale",
-    descripcion: " Cerveza de color dorado, con sabores suaves y afrutados.",
-    precio: 3500
+    descripcion: " Cerveza Berlina Hoppy Blonde Ale x 473cc.",
+    precio: 3500,
+    url: "./assets/img/blondeale.jpg."
+  },
+
+  {
+    nombre: "IPA",
+    descripcion: "Cerveza Antares IPA 6.6%Vol x 473cc.",
+    precio: 3500,
+    url: "./assets/img/cerveza ipa.jpg",
   },
   {
-    nombre: "APA",
-    descripcion: "Es una cerveza refrescante, aromática y con un amargor balanceado.",
-    precio: 3500
-  },
+    nombre: "Red Ale",
+    descripcion: "Cerveza Rabieta Red Irish Ale Lata x 473 cc.",
+    precio: 3500,
+    url: "./assets/img/red ale.jpg",
+  }
 ];
 
-console.table(cervezasArtesanales)
+// Seleccionar el contenedor en el DOM
+const contenedor = document.getElementById("contenedor-productos");
+const carritoContenedor = document.getElementById("carrito-contenedor");
 
-// creando un bucle con For que recorre todos los productos del Array
-for (let i = 0; i < cervezasArtesanales.length; i++){
-    console.log ("Agregar a mi carrito:" + [i]);
-}
+const carrito = [];
 
-// Creando un bucle con while donde se puede hacer una lista de pedidos
-let entrar = "";
-while (entrar !== "salir"){
-   entrar = prompt('escribe "salir" para terminar:');
-    if (entrar !== "salir"){
-   console.log("Agregar a mi lista de compras : "  + entrar);
-}else{
-    entrar = 'salir';
-    console.log ("Lista finalizada");
-}
+
+// Recorrer el array y renderizar
+cervezasArtesanales.forEach((producto, index) => {
+  const div = document.createElement("div");
+  div.classList.add("producto");
+
+  div.innerHTML = `
+    <h2>${producto.nombre}</h2>
+    <img src="${producto.url}" alt="${producto.nombre}" width="150" />
+    <p>${producto.descripcion}</p>
+    <p><strong>Precio:</strong> $${producto.precio}</p>
+    <button class="botoncomprar" data-index="${index}">Comprar</button>
+  `;
+
+  contenedor.appendChild(div);
+});
+
+// Escuchar clicks en los botones
+document.querySelectorAll('.botoncomprar').forEach(boton => {
+  boton.addEventListener('click', (evt) => {
+    const index = evt.target.dataset.index;
+    const productoSeleccionado = cervezasArtesanales[index];
+    carrito.push(productoSeleccionado);
+    mostrarCarrito();
+  });
+});
+
+// Mostrar carrito
+function mostrarCarrito() {
+  carritoContenedor.innerHTML = ""; // Limpiar antes
+
+  carrito.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.classList.add("carrito-item");
+    div.innerHTML = `
+      <p>${item.nombre} - $${item.precio}</p>
+    `;
+    carritoContenedor.appendChild(div);
+  });
+
+  const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+  const totalDiv = document.createElement("p");
+  totalDiv.innerHTML = `<strong>Total: $${total}</strong>`;
+  carritoContenedor.appendChild(totalDiv);
 }
