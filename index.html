@@ -14,31 +14,58 @@
     <script src="js/index.js" defer ></script>
 </head>
 <body>
-    <header>
+    <header>     
+           <div style="margin-top: 20px;">
+            <button id="vaciar-carrito">Vaciar carrito</button>
+            <button id="confirmar-compra">Confirmar compra</button>
+          </div>
+              <a class="item-nav carrito" href="#">
+                 <i id="carrito-icon" class="bi bi-cart4"></i> 
+                 <span class="carrito-contador-nav">0</span>
+                 <p>🛒</p>
+               </a>
+           <div id="contenido-carrito" class="carrito-oculto">
+             <div id="resumen-carrito"></div>
+              <div id="totales-carrito">
+                <div class="unidades">
+                    <div class="unidades-productos">
+                        <label for="">Productos:</label>
+                        <span class="productos-diferentes">0</span>
+                    </div>
+                </div>
+                <div class="unidades">
+                    <label for="">Items:</label>
+                    <span class="total-items">0</span>
+                </div>
+            </div>
+            </div>
+
+        <div class="encabezado">
         <nav class="navbar navbar-expand-lg fondonav">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Productos</a>
+              <a class="navbar-brand colorEnlace" href="#">Productos</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Ofertas</a>
+                    <a class="nav-link colorEnlace" aria-current="page" href="#">Ofertas</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="page">Contacto</a>
+                    <a class="nav-link colorEnlace" href="page">Contacto</a>
                   </li>
                 </ul>
               </div>
             </div>
-        </nav>
+         </nav>
+        </div>
     </header>
     <main>
         <h1>Cervezas Artesanales</h1>
             <div id="contenedor-productos"></div>
-            <p class="carrito">🛒</p>
             <div id="carrito-contenedor"></div>
+
     </main>
 </body>
 </html>
