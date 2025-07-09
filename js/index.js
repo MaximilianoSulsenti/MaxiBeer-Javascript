@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmarCompraBtn = document.getElementById('confirmar-compra');
     const resumenCarritoDiv = document.getElementById('resumen-carrito');
 
-    // NUEVO: Referencia al contenedor principal del carrito y al icono que lo abre
+    // Referencia al contenedor principal del carrito y al icono que lo abre
     const contenidoCarritoDiv = document.getElementById('contenido-carrito');
     const carritoIconLink = document.querySelector('.item-nav.carrito'); // Selecciona el enlace completo del icono
 
