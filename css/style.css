@@ -11,7 +11,7 @@ header{
     background-image: url(../assets/img/espuma.jpg);
 }
 main{
-  background-color: black;
+  background-color:black;
 }
 .fondonav{
     padding: 20px;
@@ -20,9 +20,9 @@ nav ul li{
     margin-left: 20px;
 }
 .colorEnlace{
-    color:black;
-    font-size: xx-large;
-    background-color:aliceblue;
+    color:rgba(9, 2, 2, 0.689);
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 h1{
     text-align-last: center;
@@ -76,12 +76,12 @@ button.botoncomprar {
 button.botoncomprar:hover {
   background-color: rgb(135, 236, 181);;
 }
-.carrito-item {
+carrito-item {
   border-bottom: 1px solid #eee;
-  padding: 5px 0;
+  padding: 400px 0;
 }
 .carrito{
-  background-color: black;
+  background-color: #f9f9f9;
 }
 #carrito-icon{
   font-size: 30px;
