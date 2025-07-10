@@ -76,10 +76,6 @@ button.botoncomprar {
 button.botoncomprar:hover {
   background-color: rgb(135, 236, 181);;
 }
-carrito-item {
-  border-bottom: 1px solid #eee;
-  padding: 400px 0;
-}
 .carrito{
   background-color: #f9f9f9;
 }
@@ -144,7 +140,7 @@ carrito-item {
 .contenido-carrito {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
-    margin-left: 37%;
+    margin-left: 5%;
     padding: 10px;
     border-radius: 8px;
     right: 15px;
