@@ -7,7 +7,6 @@ header{
     display: flex;
     flex-direction: row;
     justify-content:center;
-    background-color: black;
     padding: 65px;
     background-image: url(../assets/img/espuma.jpg);
 }
@@ -16,14 +15,14 @@ main{
 }
 .fondonav{
     padding: 20px;
-    background-color: black;
 }
 nav ul li{
     margin-left: 20px;
 }
 .colorEnlace{
-    color: aliceblue;
-    font-size: x-large;
+    color:black;
+    font-size: xx-large;
+    background-color:aliceblue;
 }
 h1{
     text-align-last: center;
