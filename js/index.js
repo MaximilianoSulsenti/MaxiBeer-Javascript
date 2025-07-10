@@ -1,51 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const cervezas = [
         {
             nombre: "Lager",
-            descripcion: "Cerveza Antares Lager Lata 473cc",
+            descripcion: "Cerveza Antares Lager x 473cc",
             precio: 2800,
             url: "./assets/img/lager.webp",
         },
         {
             nombre: "Stout",
-            descripcion: "Cerveza Lata Cream Stout Pampa Bre",
+            descripcion: "Cerveza Cream Stout Pampa x 473cc",
             precio: 2800,
             url: "./assets/img/stout.jpg",
         },
         {
             nombre: "Golden Ale",
-            descripcion: "Cerveza Brewing Golden Ale Pampa",
+            descripcion: "Cerveza Brewing Golden Ale Pampa x 473cc",
             precio: 3000,
             url: "./assets/img/golden.jpg",
         },
         {
             nombre: "Porter",
-            descripcion: "Cerveza Artesanal Ortuzar Porter 5",
+            descripcion: "Cerveza Artesanal Ortuzar Porter x 473cc",
             precio: 3000,
             url: "./assets/img/porter.jpg",
         },
         {
             nombre: "Honey Beer",
-            descripcion: "Cerveza Honey Beer elaborada con mi",
+            descripcion: "Cerveza Honey Beer elaborada con miel x 473cc",
             precio: 3000,
             url: "./assets/img/honey.jpg",
         },
         {
             nombre: "Red Ale",
-            descripcion: "Cerveza Roja Artesanal",
+            descripcion: "Cerveza Roja Artesanal x 473cc",
             precio: 3500,
             url: "./assets/img/red ale.jpg",
         },
         {
             nombre: "IPA",
-            descripcion: "Cerveza India Pale Ale",
+            descripcion: "Cerveza Antares IPA x 473cc",
             precio: 3500,
             url: "./assets/img/Cerveza ipa.jpg",
         },
         {
             nombre: "Blond Ale",
-            descripcion: "Cerveza Rubia Clara",
+            descripcion: "Cerveza Happy Blonde Ale x 473cc",
             precio: 3500,
             url: "./assets/img/blondeale.jpg", 
         },
@@ -58,11 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
     const confirmarCompraBtn = document.getElementById('confirmar-compra');
     const resumenCarritoDiv = document.getElementById('resumen-carrito');
-
-    // Referencia al contenedor principal del carrito y al icono que lo abre
-    const contenidoCarritoDiv = document.getElementById('contenido-carrito');
-    const carritoIconLink = document.querySelector('.item-nav.carrito'); // Selecciona el enlace completo del icono
-
+    const spanImporte = document.querySelector('.importe');
 
     let carrito = [];
 
@@ -70,25 +65,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function actualizarDisplayCarrito() {
         let totalItems = 0;
         let productosDiferentes = 0;
+        let Importe= 0;
 
         if (carrito.length > 0) {
             productosDiferentes = carrito.length;
             totalItems = carrito.reduce((sum, producto) => sum + producto.cantidad, 0);
+            Importe= carrito.reduce((sum, producto) => sum + (producto.precio * producto.cantidad), 0);
         }
 
         carritoContadorNav.textContent = totalItems;
         spanProductosDiferentes.textContent = productosDiferentes;
         spanTotalItems.textContent = totalItems;
+        spanImporte.textContent = `$${Importe.toFixed(2)}`;
 
-        resumenCarritoDiv.innerHTML = '';
+        resumenCarritoDiv.innerHTML = '<strong>Tu Carrito de Compras :</strong>';
 
         if (carrito.length === 0) {
-            resumenCarritoDiv.textContent = 'El carrito está vacío.';
+            resumenCarritoDiv.textContent = '';
         } else {
             const ul = document.createElement('ul');
             carrito.forEach(producto => {
                 const li = document.createElement('li');
-                li.textContent = `${producto.nombre} (Cantidad: ${producto.cantidad}) - Precio Unit: $${producto.precio}`;
+                li.textContent = `${producto.nombre} (unidad: ${producto.cantidad}) - Precio: $${producto.precio}`;
                 ul.appendChild(li);
             });
             resumenCarritoDiv.appendChild(ul);
@@ -120,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             div.innerHTML = `
                 <h2>${producto.nombre}</h2>
-                <img src="${producto.url}" alt="${producto.nombre}" width="150">
+                <img src="${producto.url}" alt="${producto.nombre}" width="110">
                 <p>${producto.descripcion}</p>
                 <p><strong>Precio:</strong> $${producto.precio}</p>
                 <button class="botoncomprar" data-index="${index}">Comprar</button>
@@ -132,28 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Event Listeners ---
-
-    // Toggle para mostrar/ocultar el contenido del carrito
-    if (carritoIconLink) {
-        carritoIconLink.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita que el enlace recargue la página
-            contenidoCarritoDiv.classList.toggle('carrito-visible');
-            contenidoCarritoDiv.classList.toggle('carrito-oculto');
-        });
-
-        // Opcional: Cerrar el carrito si se hace clic fuera de él
-        document.addEventListener('click', (e) => {
-            // Si el clic no fue dentro del contenido del carrito y no fue en el icono del carrito
-            if (!contenidoCarritoDiv.contains(e.target) && !carritoIconLink.contains(e.target)) {
-                if (contenidoCarritoDiv.classList.contains('carrito-visible')) {
-                    contenidoCarritoDiv.classList.remove('carrito-visible');
-                    contenidoCarritoDiv.classList.add('carrito-oculto');
-                }
-            }
-        });
-    }
-
-
     if (contenedor) {
         contenedor.addEventListener('click', function(e) {
             if (e.target.classList.contains('botoncomprar')) {
@@ -169,9 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             carrito = [];
             actualizarDisplayCarrito();
             alert('El carrito ha sido vaciado.');
-            // Opcional: Cerrar el panel del carrito después de vaciar
-            contenidoCarritoDiv.classList.remove('carrito-visible');
-            contenidoCarritoDiv.classList.add('carrito-oculto');
         });
     }
 
@@ -187,9 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Compra confirmada. ¡Gracias por tu pedido!');
                 carrito = [];
                 actualizarDisplayCarrito();
-                // Opcional: Cerrar el panel del carrito después de confirmar
-                contenidoCarritoDiv.classList.remove('carrito-visible');
-                contenidoCarritoDiv.classList.add('carrito-oculto');
             }
         });
     }
