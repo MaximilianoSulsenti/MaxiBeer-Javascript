@@ -79,8 +79,8 @@ button.botoncomprar:hover {
 .carrito{
   background-color: #f9f9f9;
 }
-#carrito-icon{
-  font-size: 30px;
+#carrito-icon {
+  font-size:30px;
 }
 /* Estilos para los botones y contadores */
 #vaciar-carrito {
