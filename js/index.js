@@ -1,185 +1,138 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const cervezas = [
-        {
-            nombre: "Lager",
-            descripcion: "Cerveza Antares Lager x 473cc",
-            precio: 2800,
-            url: "./assets/img/lager.webp",
-        },
-        {
-            nombre: "Stout",
-            descripcion: "Cerveza Cream Stout Pampa x 473cc",
-            precio: 2800,
-            url: "./assets/img/stout.jpg",
-        },
-        {
-            nombre: "Golden Ale",
-            descripcion: "Cerveza Brewing Golden Ale Pampa x 473cc",
-            precio: 3000,
-            url: "./assets/img/golden.jpg",
-        },
-        {
-            nombre: "Porter",
-            descripcion: "Cerveza Artesanal Ortuzar Porter x 473cc",
-            precio: 3000,
-            url: "./assets/img/porter.jpg",
-        },
-        {
-            nombre: "Honey Beer",
-            descripcion: "Cerveza Honey Beer elaborada con miel x 473cc",
-            precio: 3000,
-            url: "./assets/img/honey.jpg",
-        },
-        {
-            nombre: "Red Ale",
-            descripcion: "Cerveza Roja Artesanal x 473cc",
-            precio: 3500,
-            url: "./assets/img/red ale.jpg",
-        },
-        {
-            nombre: "IPA",
-            descripcion: "Cerveza Antares IPA x 473cc",
-            precio: 3500,
-            url: "./assets/img/Cerveza ipa.jpg",
-        },
-        {
-            nombre: "Blond Ale",
-            descripcion: "Cerveza Happy Blonde Ale x 473cc",
-            precio: 3500,
-            url: "./assets/img/blondeale.jpg", 
-        },
-    ];
+const carritoButton= document.getElementById("carrito-button");
+const contenedorProductos = document.getElementById("contenedor-productos");
+const contadorCarrito= document.getElementById("contador-carrito");
 
-    const contenedor = document.getElementById("contenedor-productos");
-    const carritoContadorNav = document.querySelector('.carrito-contador-nav');
-    const spanProductosDiferentes = document.querySelector('.productos-diferentes');
-    const spanTotalItems = document.querySelector('.total-items');
-    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
-    const confirmarCompraBtn = document.getElementById('confirmar-compra');
-    const resumenCarritoDiv = document.getElementById('resumen-carrito');
-    const spanImporte = document.querySelector('.importe');
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    let carrito = [];
-
-    // --- Funciones para el Carrito ---
-    function actualizarDisplayCarrito() {
-        let totalItems = 0;
-        let productosDiferentes = 0;
-        let Importe= 0;
-
-        if (carrito.length > 0) {
-            productosDiferentes = carrito.length;
-            totalItems = carrito.reduce((sum, producto) => sum + producto.cantidad, 0);
-            Importe= carrito.reduce((sum, producto) => sum + (producto.precio * producto.cantidad), 0);
-        }
-
-        carritoContadorNav.textContent = totalItems;
-        spanProductosDiferentes.textContent = productosDiferentes;
-        spanTotalItems.textContent = totalItems;
-        spanImporte.textContent = `$${Importe.toFixed(2)}`;
-
-        resumenCarritoDiv.innerHTML = '<strong>Tu Carrito de Compras :</strong>';
-
-        if (carrito.length === 0) {
-            resumenCarritoDiv.textContent = '';
-        } else {
-            const ul = document.createElement('ul');
-            carrito.forEach(producto => {
-                const li = document.createElement('li');
-                li.textContent = `${producto.nombre} (unidad: ${producto.cantidad}) - Precio: $${producto.precio}`;
-                ul.appendChild(li);
-            });
-            resumenCarritoDiv.appendChild(ul);
-        }
-    }
-
-    function agregarProductoAlCarrito(producto) {
-        const productoExistenteIndex = carrito.findIndex(item => item.id === producto.nombre);
-
-        if (productoExistenteIndex > -1) {
-            carrito[productoExistenteIndex].cantidad++;
-        } else {
-            carrito.push({
-                id: producto.nombre,
-                nombre: producto.nombre,
-                precio: producto.precio,
-                cantidad: 1
-            });
-        }
-        actualizarDisplayCarrito();
-        console.log("Carrito actual:", carrito);
-    }
-
-    // --- Renderizado de Productos ---
-    if (contenedor) {
-        cervezas.forEach((producto, index) => {
-            const div = document.createElement("div");
-            div.classList.add("producto");
-
-            div.innerHTML = `
-                <h2>${producto.nombre}</h2>
-                <img src="${producto.url}" alt="${producto.nombre}" width="110">
-                <p>${producto.descripcion}</p>
-                <p><strong>Precio:</strong> $${producto.precio}</p>
-                <button class="botoncomprar" data-index="${index}">Comprar</button>
-            `;
-            contenedor.appendChild(div);
+async function productos(){
+    try{
+       const respuesta = await fetch ("productos.json");
+       const data = await respuesta.json();
+       mostrarProductos(data);
+    } catch(error){
+       Swal.fire({
+          icon: "info",
+          title: "Error de carga de productos",
+          text: `${err}`,
         });
-    } else {
-        console.error("El elemento con ID 'contenedor-productos' no fue encontrado en el DOM.");
-    }
-
-    // --- Event Listeners ---
-    if (contenedor) {
-        contenedor.addEventListener('click', function(e) {
-            if (e.target.classList.contains('botoncomprar')) {
-                const index = parseInt(e.target.dataset.index);
-                const productoSeleccionado = cervezas[index];
-                agregarProductoAlCarrito(productoSeleccionado);
-            }
-        });
-    }
-
-    if (vaciarCarritoBtn) {
-        vaciarCarritoBtn.addEventListener('click', () => {
-            carrito = [];
-            actualizarDisplayCarrito();
-            alert('El carrito ha sido vaciado.');
-        });
-    }
-
-    if (confirmarCompraBtn) {
-        confirmarCompraBtn.addEventListener('click', () => {
-            if (carrito.length === 0) {
-                alert('El carrito está vacío. Añade productos antes de confirmar la compra.');
-                return;
-            }
-
-            const confirmar = confirm('¿Estás seguro de que quieres confirmar la compra?');
-            if (confirmar) {
-                alert('Compra confirmada. ¡Gracias por tu pedido!');
-                carrito = [];
-                actualizarDisplayCarrito();
-            }
-        });
-    }
-
-    // Cargar el carrito desde localStorage al inicio y actualizar el display
-    const carritoGuardado = localStorage.getItem("carrito");
-    if (carritoGuardado) {
-        carrito = JSON.parse(carritoGuardado);
-        actualizarDisplayCarrito();
-    }
-
-    // Guarda el carrito en localStorage cada vez que haya un cambio
-    function guardarCarritoEnLocalStorage() {
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-    }
-
-    // Modifica las funciones que alteran el carrito para guardar los cambios
-    const originalActualizarDisplayCarrito = actualizarDisplayCarrito;
-    actualizarDisplayCarrito = function() {
-        originalActualizarDisplayCarrito();
-        guardarCarritoEnLocalStorage();
     };
-});
+}
+
+function mostrarProductos(producto){
+    contenedorProductos.innerHTML="";
+    producto.forEach((beer)=>{
+      const beerCard = document.createElement('div');
+      beerCard.classList.add("beer-card");
+      beerCard.innerHTML = `
+       <img src="${beer.img}" alt="${beer.nombre}"/>
+       <h2>${beer.nombre}</h2>
+       <p>$ ${beer.precio}</p>
+       <button data-id="${beer.id}" > Agregar </button>
+        `;
+        contenedorProductos.appendChild(beerCard);
+    });
+
+         document.querySelectorAll(".beer-card").forEach((button)=>{
+         button.addEventListener("click",(evt)=>{
+            const productoId = parseInt(evt.target.dataset.id)
+            const productoToAdd = producto.find((item)=> item.id === productoId)
+            if(productoId){
+                addToCarrito(productoToAdd);
+            }
+        })
+    })
+    }
+
+    function actualizarCarrito() {
+    contadorCarrito.textContent = carrito.reduce(
+        (acc, item)=> acc + item.quantity, 0)
+    }
+        
+     function addToCarrito(beer) {
+    const productoExistente = carrito.find((item)=> item.id === beer.id)
+
+    if(productoExistente){
+        productoExistente.quantity += 1;
+    }else {
+        carrito.push({...beer, quantity: 1})
+    }
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    
+    actualizarCarrito()
+}
+   
+function showCarrito() {
+    if(carrito.length === 0){
+        Swal.fire({
+            icon: 'info',
+            title: 'Carrito vacío',
+            text: 'Agregar productos al carrito',
+        })
+        return;
+    }
+ let carritoContent = '<ul class="carrito-lista">';
+    let total = 0;
+
+    carrito.forEach((item)=> {
+        const itemTotal = item.precio * item.quantity + 1;
+        total += itemTotal;
+        carritoContent += `
+        <li class="carrito-elementos">
+                    <img src="${item.img}" alt="${item.nombre}" class="img-carrito">
+                    <span class="item-carrito">${item.nombre} x ${item.quantity}</span>
+                    <span>$${itemTotal.toFixed(2)} 
+                    <button class="eliminar-de-carrito" data-id="${item.id}">X</button>
+                    </span>
+                </li>
+            `;
+    });
+    carritoContent += `</ul>`;
+        carritoContent += `<p class="total-carrito">Total: $${total.toFixed(2)}</p>`;
+
+        const now = luxon.DateTime.local()
+                    .setLocale('es')
+                    .toLocaleString(luxon.DateTime.DATETIME_MED);
+    carritoContent += `<p class="fecha-carrito">Fecha actual: ${now}</p>`
+
+ Swal.fire({
+        title: '<span class="textCarrito">Carrito de Compras</span>',
+        html: carritoContent,
+        width: 700,
+        showCancelButton: true,
+        confirmButtonText: 'Finalizar Compra',
+        cancelButtonText: 'Continuar Compra',
+        didOpen: () => {
+            document.querySelectorAll(".eliminar-de-carrito").forEach((button)=>{
+                button.addEventListener("click", (evt)=>{
+                    // para eliminar producto del carrito
+                    const productoToRemove = parseInt(evt.target.dataset.id)
+                    removeFromCarrito(productoToRemove)
+                    // para volver a abrir el carrito
+                    showCarrito()
+                })
+            })
+        }
+    }).then((result)=> {
+        if(result.isConfirmed){
+            Swal.fire({
+                icon: "success",
+                title: 'Compra Confirmada',
+                text: `Muchas Gracias por su Compra!`
+            })
+            // limpiar el carrito
+            carrito = [];
+            localStorage.removeItem("carrito");
+            actualizarCarrito();
+        }
+    })
+}
+function removeFromCarrito(productoId){
+    carrito = carrito.filter((item)=> item.id !== productoId)
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarCarrito();
+}
+
+carritoButton.addEventListener('click', showCarrito)
+  
+   productos()
+   actualizarCarrito()
