@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "nombre": "Lager",
+    "descripcion": "Cerveza Antares Lager x 473cc",
+    "precio": 2800,
+    "img": "./assets/img/lager.webp"
+  },
+  {
+    "id": 2,
+    "nombre": "Stout",
+    "descripcion": "Cerveza Cream Stout Pampa x 473cc",
+    "precio": 2800,
+    "img": "./assets/img/stout.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Golden Ale",
+    "descripcion": "Cerveza Brewing Golden Ale Pampa x 473cc",
+    "precio": 3000,
+    "img": "./assets/img/golden.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Porter",
+    "descripcion": "Cerveza Artesanal Ortuzar Porter x 473cc",
+    "precio": 3000,
+    "img": "./assets/img/porter.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Honey Beer",
+    "descripcion": "Cerveza Honey Beer elaborada con miel x 473cc",
+    "precio": 3000,
+    "img": "./assets/img/honey.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Red Ale",
+    "descripcion": "Cerveza Roja Artesanal x 473cc",
+    "precio": 3500,
+    "img": "./assets/img/red ale.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "IPA",
+    "descripcion": "Cerveza Antares IPA x 473cc",
+    "precio": 3500,
+    "img": "./assets/img/Cerveza ipa.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Blond Ale",
+    "descripcion": "Cerveza Happy Blonde Ale x 473cc",
+    "precio": 3500,
+    "img": "./assets/img/blondeale.jpg"
+  }
+]
