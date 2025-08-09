@@ -6,12 +6,14 @@
 header{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content:space-between;
+    align-items: center;
     padding: 65px;
     background-image: url(../assets/img/espuma.jpg);
 }
 .fondonav{
     padding: 20px;
+    right: 50%;
 }
 nav ul li{
     margin-left: 20px;
@@ -21,13 +23,11 @@ nav ul li{
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
 }
-main{
-    background-color: black;
-}
-h1{
+h1{ 
+    font-size: 330%;
     text-align-last: center;
-    padding: 20px;
-    color: white;
+    padding: 30px 20px;
+    color: rgb(7, 3, 0);
 }
 #contenedor-productos{
     display: grid;
@@ -79,16 +79,16 @@ h1{
   transition: background-color 0.3s ease;
 }
 .beer-card button:hover {
-  background-color: #027b1a;
+  background-color: #0e8526;
 }
 #carrito-button {
     background-color: rgba(19, 18, 18, 0.766);
     color: white;
     border: none;
-    padding: 0.7rem 1.2rem;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.6rem;
     transition: background-color 0.3s ease;
 }
 
@@ -151,4 +151,41 @@ footer{
   background-color: black;
   color: aliceblue;
   padding: 40px;
+}
+#btnModoOscuro{
+   position: absolute;
+   right: 6%;
+}
+body {
+    margin: 0;
+    background-color: aliceblue;
+    color: black;
+    transition: background-color 1.2s ease, color 1.2s ease;
+}
+button {
+    padding: 5px 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: #e3eaefe1;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #dfdfef;
+}
+body.dark-mode {
+    background-color:black;
+    color: #0b0c0d; 
+}
+
+body.dark-mode h1{
+  color:black;
+}
+body.dark-mode h2 {
+    color: #080808; 
+}
+body.dark-mode button {
+    background-color: #010201;
 }
