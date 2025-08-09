@@ -6,20 +6,20 @@
 header{
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content:center;
     align-items: center;
     padding: 65px;
     background-image: url(../assets/img/espuma.jpg);
 }
-.fondonav{
+fondonav{
     padding: 20px;
-    right: 50%;
+    right: 10%;
 }
 nav ul li{
     margin-left: 20px;
 }
 .colorEnlace{
-    color:rgba(9, 2, 2, 0.689);
+    color:rgba(9, 2, 2, 0.892);
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -181,11 +181,47 @@ body.dark-mode {
 }
 
 body.dark-mode h1{
-  color:black;
+  color:rgb(244, 241, 241);
 }
 body.dark-mode h2 {
     color: #080808; 
 }
 body.dark-mode button {
     background-color:#39c427;
+}
+
+
+.infocontacto {
+  text-align-last: center;
+  text-decoration: underline;
+  font-size: 250%;
+  color: rgb(2, 2, 8);
+  padding: 30px 20px;
+}
+
+.formulariocontacto {
+  padding: 20px 30px;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 50%;
+  justify-content: center;
+  border-radius: 10px;
+  background-color:rgb(165, 164, 164);
+}
+
+.btn {
+  background-color: rgba(11, 11, 230, 0.975);
+  color: aliceblue;
+}
+
+.textformulario {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  color:black;
+}
+p {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 150%;
+  padding: 5px 50px;
 }
