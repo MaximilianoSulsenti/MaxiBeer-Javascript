@@ -20,9 +20,8 @@
 </head>
 <body>
     <header>
-      <h1>Contactate</h1>
       <div> 
-         <nav class="navbar navbar-expand-lg fondonav">
+         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid">
               <a class="navbar-brand colorEnlace" href="../index.html"><strong>Productos</strong></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,8 +36,46 @@
               </div>
             </div>
           </nav>
-          <button id="btnModoOscuro"><img src="./assets/img/dia-y-noche .png"></button>
         </div>
    </header>
+      <main>
+         <h1 class="infocontacto">Informacion del contacto</h1>
+         <p>Envia tu comentario , duda o sugerencia . Te contestaremos a la brevedad</p>
+         <div>
+         <p>Email:  <a href="mailto:contacto@gmail.com">maxiBeer@gmail.com</a></p>
+          <p>Instagram:  <a href="https://www.instagram.com/">MaxiBeer</a></p>
+          <p>Whatsapp:  <a href="https://wa.me/123456">123456</a></p>
+            <p>CP 2000 Rosario, Argentina</p>
+            </div>
+         <section>
+            <form class="formulariocontacto">
+              <div class="mb-3">
+                <label for="email" class="form-label textformulario">Direccion de Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="nombreyapellido" class="form-label textformulario">Nombre y Apellido</label>
+                <input type="text" class="form-control" id="nombreyapellido" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="numerodecontacto" class="form-label textformulario">Tu Numero de contacto</label>
+                <input type="number" class="form-control" id="numerodecontacto" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="mensaje" class="form-label textformulario">Dejanos tu mensaje ...</label>
+                 <textarea name="" id="mensaje" class="form-control"></textarea>              
+              </div>
+              <button type="submit" class="btn">Enviar</button>
+              <button type="submit" class="btn">Borrar</button>
+            </form>
+            </section>
+      </main>
+      <footer class="footer mt-auto">
+       <div class="container text-center">
+         <div class="mt-3">     
+           <small>© 2025 Mi Sitio Web. Todos los derechos reservados.</small>
+          </div>
+        </div>
+    </footer> 
 </body>
 </html>
