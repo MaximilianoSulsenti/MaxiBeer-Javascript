@@ -8,7 +8,7 @@ const contadorCarrito= document.getElementById("contador-carrito");
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // cargar productos del Json por medio de Fetch 
-async function productos(){
+async function cargarProductos(){
     try{
        const respuesta = await fetch ("productos.json");
        const data = await respuesta.json();
@@ -80,7 +80,7 @@ function showCarrito() {
     let total = 0;
 
     carrito.forEach((item)=> {
-        const itemTotal = item.precio * item.quantity + 1;
+        const itemTotal = item.precio * item.quantity + 0;
         total += itemTotal;
         carritoContent += `
         <li class="carrito-elementos">
@@ -137,11 +137,9 @@ function removeFromCarrito(productoId){
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
+
 carritoButton.addEventListener('click', showCarrito)
   
-   productos()
-   actualizarCarrito()
-
    // Se crea Boton para modo oscuro de Body
    btnModoOscuro.addEventListener("click", () => {
    body.classList.toggle("dark-mode");
@@ -152,3 +150,8 @@ carritoButton.addEventListener('click', showCarrito)
     localStorage.setItem("tema", "light");
   }
 });
+
+// Inicialización
+cargarProductos();
+actualizarCarrito();
+
