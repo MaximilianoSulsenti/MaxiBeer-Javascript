@@ -1,9 +1,13 @@
+// Declaracion de constantes 
+const btnModoOscuro = document.getElementById("btnModoOscuro");
+const body = document.body;
 const carritoButton= document.getElementById("carrito-button");
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contadorCarrito= document.getElementById("contador-carrito");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+// cargar productos del Json por medio de Fetch 
 async function productos(){
     try{
        const respuesta = await fetch ("productos.json");
@@ -18,6 +22,7 @@ async function productos(){
     };
 }
 
+// se crean elementos en el DOM
 function mostrarProductos(producto){
     contenedorProductos.innerHTML="";
     producto.forEach((beer)=>{
@@ -42,7 +47,8 @@ function mostrarProductos(producto){
         })
     })
     }
-
+    
+    // Declaracion de Funciones para Carrito de Compras
     function actualizarCarrito() {
     contadorCarrito.textContent = carrito.reduce(
         (acc, item)=> acc + item.quantity, 0)
@@ -131,8 +137,18 @@ function removeFromCarrito(productoId){
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarCarrito();
 }
-
 carritoButton.addEventListener('click', showCarrito)
   
    productos()
    actualizarCarrito()
+
+   // Se crea Boton para modo oscuro de Body
+   btnModoOscuro.addEventListener("click", () => {
+   body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("tema", "dark");
+  } else {
+    localStorage.setItem("tema", "light");
+  }
+});
