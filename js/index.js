@@ -4,20 +4,24 @@ const body = document.body;
 const carritoButton= document.getElementById("carrito-button");
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contadorCarrito= document.getElementById("contador-carrito");
+const buscarProducto = document.getElementById("buscar-producto");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // cargar productos del Json por medio de Fetch 
+let productosData = [];
+
 async function cargarProductos(){
     try{
        const respuesta = await fetch ("productos.json");
        const data = await respuesta.json();
+       productosData = data;
        mostrarProductos(data);
     } catch(error){
        Swal.fire({
           icon: "info",
           title: "Error de carga de productos",
-          text: `${err}`,
+          text: `${error}`,
         });
     };
 }
@@ -25,7 +29,12 @@ async function cargarProductos(){
 // se crean elementos en el DOM
 function mostrarProductos(producto){
     contenedorProductos.innerHTML="";
-    producto.forEach((beer)=>{
+
+    if (producto.length === 0) {
+        contenedorProductos.innerHTML = `<p>No se encontraron productos</p>`;
+        return; //
+    }
+   producto.forEach((beer)=>{
       const beerCard = document.createElement('div');
       beerCard.classList.add("beer-card");
       beerCard.innerHTML = `
@@ -154,4 +163,18 @@ carritoButton.addEventListener('click', showCarrito)
 // Inicialización
 cargarProductos();
 actualizarCarrito();
+
+
+// Buscador en tiempo real
+
+if (buscarProducto) {
+    buscarProducto.addEventListener("input", (e) => {
+        const texto = e.target.value.toLowerCase();
+        const filtrados = productosData.filter(p =>
+            p.nombre.toLowerCase().includes(texto) ||
+            p.descripcion.toLowerCase().includes(texto)
+        );
+        mostrarProductos(filtrados);
+    });
+}
 
