@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
 }
+
+/* Estilos para el encabezado */
 header{
     display: flex;
     flex-direction: row;
@@ -10,10 +12,6 @@ header{
     align-items: center;
     padding: 65px;
     background-image: url(../assets/img/espuma.jpg);
-}
-fondonav{
-    padding: 20px;
-    right: 10%;
 }
 nav ul li{
     margin-left: 20px;
@@ -29,11 +27,13 @@ h1{
     padding: 30px 20px;
     color: rgb(7, 3, 0);
 }
+/* Aplica estilos para la carga de Productos en el DOM  */
 #contenedor-productos{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr); 
     gap: 1.5rem;
     padding: 40px 30px;
+    justify-items: center;
 }
 .beer-card {
     display: flex;
@@ -42,14 +42,14 @@ h1{
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 40px 30px;
+    padding: 30px 100px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
 }
 .beer-card img {
-  max-width: 100%;
-  height: 230px;
+  max-width:100%;
+  height: auto;
   object-fit: contain;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -57,7 +57,7 @@ h1{
 .beer-card:hover {
   transform: scale(1.1);
 }
-.beer-card h3 {
+.beer-card h2 {
   margin-bottom: 5px;
   font-size: 1.6em;
   color:#0b0303;
@@ -81,6 +81,8 @@ h1{
 .beer-card button:hover {
   background-color: #0e8526;
 }
+
+/* estilos para todo el sector de carrito de compras */
 #carrito-button {
     background-color: rgba(19, 18, 18, 0.766);
     color: white;
@@ -91,11 +93,9 @@ h1{
     font-size: 1.6rem;
     transition: background-color 0.3s ease;
 }
-
 #carrito-button:hover {
     background-color: black;
 }
-
 .carrito-lista{
     list-style: none; 
     padding: 0;
@@ -147,11 +147,15 @@ h1{
     text-decoration:underline;
     font-style: italic;
 }
+
+/* pie de pagina */
 footer{
   background-color: black;
   color: aliceblue;
   padding: 40px;
 }
+
+/* para el boton de modo oscuro en Body*/
 #btnModoOscuro{
    position: absolute;
    right: 6%;
@@ -190,7 +194,7 @@ body.dark-mode button {
     background-color:#39c427;
 }
 
-
+/* estilos para la seccion de contacto */
 .infocontacto {
   text-align-last: center;
   text-decoration: underline;
@@ -198,7 +202,6 @@ body.dark-mode button {
   color: rgb(2, 2, 8);
   padding: 30px 20px;
 }
-
 .formulariocontacto {
   padding: 20px 30px;
   margin: auto;
@@ -209,12 +212,10 @@ body.dark-mode button {
   border-radius: 10px;
   background-color:rgb(165, 164, 164);
 }
-
 .btn {
   background-color: rgba(11, 11, 230, 0.975);
   color: aliceblue;
 }
-
 .textformulario {
   font-family: Arial, Helvetica, sans-serif;
   font-size: x-large;
@@ -224,4 +225,26 @@ p {
   font-family:Arial, Helvetica, sans-serif;
   font-size: 150%;
   padding: 5px 50px;
+}
+/* para buscador */
+.buscador input{
+  margin: 20px;
+  padding: 10px;
+  width: 40%;
+}
+.buscador {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; 
+}
+
+
+@media(max-width:650px){
+#contenedor-productos {
+        grid-template-columns: 1fr;
+        margin:10px;
+}
+.buscador input{
+  width:80%;
+}
 }
