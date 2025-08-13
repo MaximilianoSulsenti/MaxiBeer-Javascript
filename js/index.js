@@ -164,7 +164,6 @@ carritoButton.addEventListener('click', showCarrito)
 cargarProductos();
 actualizarCarrito();
 
-
 // Buscador en tiempo real
 
 if (buscarProducto) {
@@ -177,4 +176,3 @@ if (buscarProducto) {
         mostrarProductos(filtrados);
     });
 }
-
