@@ -176,3 +176,21 @@ if (buscarProducto) {
         mostrarProductos(filtrados);
     });
 }
+
+function mostrarToastAgregado(nombreProducto) {
+    Toastify({
+        text: `${nombreProducto} agregado al carrito`,
+        duration: 2500,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#43a047",
+        stopOnFocus: true
+    }).showToast();
+}
+
+// Modifica addToCarrito para mostrar el toast
+const originalAddToCarrito = addToCarrito;
+addToCarrito = function(beer) {
+    originalAddToCarrito(beer);
+    mostrarToastAgregado(beer.nombre);
+};
